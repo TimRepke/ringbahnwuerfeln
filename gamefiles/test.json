@@ -1,0 +1,24 @@
+{
+    "teams": {
+        "test": {
+            "name": "test",
+            "secret": "test",
+            "stops": [
+                {
+                    "stop": 0,
+                    "beer_size": 0,
+                    "rolled_time": 1511129135,
+                    "rolled_steps": 0
+                },
+                {
+                    "stop": 5,
+                    "rolled_time": 1511130052,
+                    "rolled_steps": 5,
+                    "beer_size": 0.5
+                }
+            ]
+        }
+    },
+    "name": "Test",
+    "start": "Tempelhof"
+}
