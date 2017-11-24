@@ -8,15 +8,19 @@
         * {
             font-family: sans-serif;
         }
+
         body {
             color: #2c3e50;
             background: #ecf0f1;
+            margin: 0;
+            padding: 0;
         }
 
         #wrapper {
             width: 100%;
             max-width: 400px;
-            margin: 1em auto;
+            margin: -1em auto 1em auto;
+            padding: 5px;
         }
 
         #ringbahn-svg text {
@@ -25,6 +29,10 @@
 
         #ringbahn {
             width: 100%;
+        }
+
+        #list-teams {
+            /*padding: 0 1em;*/
         }
 
         #submit {
@@ -47,18 +55,98 @@
             cursor: pointer;
         }
 
+        .dice.shake {
+            animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0.25em, 0);
+            }
+
+            20%, 80% {
+                transform: translate3d(2px, 0.25em, 0);
+            }
+
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0.25em, 0);
+            }
+
+            40%, 60% {
+                transform: translate3d(4px, 0.25em, 0);
+            }
+        }
+
         #new-team {
-            width: 100%;
+            margin: 0.4em 0.3em;
         }
 
         #new-team input {
-            width: 40%;
+            width: 75%;
             line-height: 30px;
             margin-left: 5px;
+            margin-top: 0.5em;
         }
 
-        #new-team input, #new-team a {
-            float: left;
+        #new-team input:first-of-type {
+            margin-top: 0;
+        }
+
+        #new-team a {
+            float: right;
+            margin-top: -0.75em;
+            margin-right: 10px;
+        }
+
+        #modal {
+            position: absolute;
+            top: 55px;
+            left: 13px;
+            width: 90vw;
+            max-width: 302px;
+            min-height: 10vh;
+            background-color: #dce0e1;
+            z-index: 500;
+            border: 1px solid grey;
+        }
+
+        #close-modal {
+            text-decoration: none;
+            color: black;
+            font-size: 2em;
+            position: absolute;
+            top: -0.6em;
+            right: -0.5em;
+        }
+
+        .picklist {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .picklist input {
+            width: 100%;
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .picklist li {
+            border-bottom: 1px solid #ccc;
+            padding: 0.5em 1em;
+            font-size: 1.3em;
+        }
+
+        .picklist a {
+            text-decoration: none;
+        }
+
+        .picklist li:last-child {
+            border: none;
         }
 
         .round-button {
@@ -80,6 +168,7 @@
         .beer-bottle {
             height: 1em;
         }
+
         .beer-bottle path {
             fill: white;
         }
@@ -94,15 +183,17 @@
         .tab {
             position: relative;
             margin-bottom: 1px;
-            width: 100%;
+            /*width: 100%;*/
             color: #fff;
             overflow: hidden;
         }
+
         .tab input {
             position: absolute;
             opacity: 0;
             z-index: -1;
         }
+
         .tab label {
             position: relative;
             display: block;
@@ -112,6 +203,7 @@
             line-height: 3;
             cursor: pointer;
         }
+
         .tab-content {
             max-height: 0;
             overflow: hidden;
@@ -120,13 +212,16 @@
             -o-transition: max-height .35s;
             transition: max-height .35s;
         }
+
         .tab-content p {
             margin: 1em;
         }
+
         /* :checked */
         .tab input:checked ~ .tab-content {
             max-height: 10em;
         }
+
         /* Icon */
         .tab label::after {
             position: absolute;
@@ -141,64 +236,214 @@
             -o-transition: all .35s;
             transition: all .35s;
         }
+
         .tab input[type=checkbox] + label::after {
             content: "+";
         }
+
         .tab input[type=radio] + label::after {
             content: "\25BC";
         }
+
         .tab input[type=checkbox]:checked + label::after {
             transform: rotate(315deg);
         }
+
         .tab input[type=radio]:checked + label::after {
             transform: rotateX(180deg);
         }
+
+        /*
+         * Side Menu
+         * Made by Erik Terwan
+         * 24th of November 2015
+         * All rights reserved
+         *
+         *
+         * If you are thinking of using this in
+         * production code, beware of the browser
+         * prefixes.
+         * https://codepen.io/anon/pen/GOGdbJ
+         */
+        nav {
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu a {
+            text-decoration: none;
+            color: #232323;
+
+            transition: color 0.3s ease;
+        }
+
+        #menu a:hover {
+            color: tomato;
+        }
+
+        #menuToggle {
+            display: block;
+            position: relative;
+            top: 1em;
+            left: 1em;
+            z-index: 1;
+            -webkit-user-select: none;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+            width: 99%;
+        }
+
+        #menuToggle input {
+            display: block;
+            width: 40px;
+            height: 32px;
+            position: absolute;
+            top: -7px;
+            left: -5px;
+            cursor: pointer;
+            opacity: 0; /* hide this */
+            z-index: 2; /* and place it over the hamburger */
+            -webkit-touch-callout: none;
+        }
+
+        #menuToggle span {
+            display: block;
+            width: 33px;
+            height: 4px;
+            margin-bottom: 5px;
+            position: relative;
+
+            background: #2980b9;
+            border-radius: 3px;
+
+            z-index: 1;
+
+            transform-origin: 4px 0;
+
+            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+            background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+            opacity 0.55s ease;
+        }
+
+        #menuToggle span:first-child {
+            transform-origin: 0 0;
+        }
+
+        #menuToggle span:nth-last-child(2) {
+            transform-origin: 0 100%;
+        }
+
+        #menuToggle input:checked ~ span {
+            opacity: 1;
+            transform: rotate(45deg) translate(-2px, -1px);
+            background: #232323;
+        }
+
+        #menuToggle input:checked ~ span:nth-last-child(3) {
+            opacity: 0;
+            transform: rotate(0deg) scale(0.2, 0.2);
+        }
+
+        #menuToggle input:checked ~ span:nth-last-child(2) {
+            transform: rotate(-45deg) translate(0, -1px);
+        }
+
+        #menu {
+            position: absolute;
+            width: 300px;
+            margin: -100px 0 0 -50px;
+            padding: 50px;
+            padding-top: 125px;
+
+            background: #ededed;
+            list-style-type: none;
+            -webkit-font-smoothing: antialiased;
+            /* to stop flickering of text in safari */
+
+            transform-origin: 0 0;
+            transform: translate(-100%, 0);
+
+            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        }
+
+        #menu li {
+            padding: 10px 0;
+            font-size: 22px;
+            border-bottom: 1px dotted lightblue;
+        }
+
+        #menuToggle input:checked ~ ul {
+            transform: none;
+        }
+
     </style>
 </head>
 <body>
+<div id="modal" style="display: none"></div>
+<nav role="navigation">
+    <div id="menuToggle">
+        <!--
+        A fake / hidden checkbox is used as click reciever,
+        so you can use the :checked selector on it.
+        -->
+        <input title="navcheck" name="navcheck" id="nav-check" type="checkbox"/>
+
+        <!--
+        Some spans to act as a hamburger.
+
+        They are acting like a real hamburger,
+        not that McDonalds stuff.
+        -->
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <!--
+        Too bad the menu has to be inside of the button
+        but hey, it's pure CSS magic.
+        -->
+        <ul id="menu">
+            <li><a href="#" id="nav-pick-game">Pick Game</a></li>
+            <li><a href="#" id="nav-pick-team">Pick Team</a></li>
+            <li><a href="#" id="nav-new-team">New Team</a></li>
+            <li><a href="#" id="nav-reset">Kill Cookie</a></li>
+        </ul>
+    </div>
+</nav>
 <div id="wrapper">
     <div id="ringbahn">
         <svg id="ringbahn-svg" viewBox="0 0 100 100">
         </svg>
     </div>
     <div style="font-size:1.7em; width: 100%; text-align: center; vertical-align: middle">
-        <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 viewBox="0 0 238 236.6" style="height: 1.5em;margin-right:-0.5em; margin-bottom:-0.2em; enable-background:new 0 0 238 236.6;" xml:space="preserve"> <style type="text/css"> 	.st0{fill:#0062AE;}     .st1{fill:#FFFFFF;}     .st2{fill:#0063AF;} </style> <g id="Gruppe_5007" transform="translate(-2082 -4778)"> 	<g id="Gruppe_5004" transform="translate(1174.057 5785.434)"> 		<path id="Pfad_2959" class="st0" d="M1068.9-771.4v0.5h-15.6c-1.5,0.2-2.9-0.6-3.7-1.9c-6.4-8.9-12.9-17.6-19.3-26.3 			c-0.9-1.5-2.5-2.3-4.2-2.2h-55.8c-1.8-0.2-3.5,0.8-4.4,2.3l-19.2,26.1c-0.5,0.8-1.3,1.5-2.2,1.9c-5.5,0.2-11.1,0.2-17.1,0.2 			c10.6-14.6,20.7-28.8,31.1-43.1c-0.8-0.3-1.3-0.5-1.8-0.6c-10.9-3.3-18.7-12.4-18.7-23c-0.3-30-0.5-59.9-0.3-89.9 			c0-12.8,11.4-23.7,25.2-23.8c23.4-0.3,46.9-0.3,70.3,0c14,0.2,25.2,11,25.4,24c0.2,29.9,0.2,59.8,0,89.6 			c0,10.7-7.7,19.9-18.8,23.2c-0.6,0.2-1.1,0.4-1.7,0.6c0.5,0.6,0.7,1.1,1,1.6c9.6,13.2,19,26.5,28.6,39.7 			C1068-772.3,1068.5-771.9,1068.9-771.4z M998.1-885.2L998.1-885.2c10.8,0,21.3,0.2,32.1,0c8.7-0.2,13.8-4.8,13.8-12.9 			c0-5.1,0.2-10.1,0-15.2c-0.2-7.9-5.2-12.8-13.8-12.8c-21.5-0.2-43-0.2-64.4,0c-8.6,0-13.6,4.8-13.6,12.8c-0.2,4.7,0,9.3,0,13.8 			c0,9.8,4.7,14.3,15.3,14.3L998.1-885.2z M998.1-931.1h12.4c3.4,0,5-1.6,5.2-4.7c0.2-2.1,0.2-4.2,0-6.2c-0.2-2.6-1.7-4.4-4.7-4.4 			c-8.6-0.2-17.1-0.2-25.7,0c-3,0-4.5,1.7-4.7,4.4v5.9c0.2,3.3,1.8,4.8,5.4,4.8C989.9-931.1,993.9-931.1,998.1-931.1L998.1-931.1z 			 M1031.7-849.1c-6.6,0-11.8,4.8-11.9,10.7c-0.2,6.1,5.4,11.2,11.9,11c6.4,0,11.8-5,11.8-10.9 			C1043.5-844.1,1038.3-849.1,1031.7-849.1L1031.7-849.1z M975.9-838c0-6.1-5.2-10.9-11.6-11c-6.6,0-12.1,5-11.9,11 			c0,5.9,5.4,10.9,11.9,10.9C970.5-827.1,975.9-832.1,975.9-838z"/> 		<path id="Pfad_2960" class="st0" d="M990.2-967.9c2.5,1.4,4.9,3,5.2,5.9c0.5,3.6-1.7,6.5-5.4,7.6c-3.5,1-7.3-0.6-8.9-3.9 			c-1.5-3.2-0.3-7,2.9-8.7c0.7-0.3,1.3-0.8,2-1.1C987.4-968,988.8-967.9,990.2-967.9z"/> 		<path id="Pfad_2961" class="st0" d="M1009.9-967.9c3.2,1.4,5.5,3.6,5.5,7.2c0,3.3-2.5,5.9-6.1,6.5c-3.3,0.7-6.6-0.9-8.1-3.9 			c-1.5-3-0.5-6.5,2.2-8.4c0.7-0.5,1.5-0.9,2.4-1.4H1009.9z"/> 		<path id="Pfad_2962" class="st1" d="M998.1-885.2h-30.6c-10.6,0-15.3-4.5-15.3-14.3v-13.8c0.2-7.9,5-12.8,13.6-12.8 			c21.5-0.2,43-0.2,64.4,0c8.6,0,13.6,4.8,13.8,12.8c0.2,5.1,0,10.1,0,15.2c-0.2,8.1-5,12.8-13.8,12.9 			C1019.5-885.2,1008.7-885.3,998.1-885.2L998.1-885.2z"/> 		<path id="Pfad_2963" class="st1" d="M998.1-931.1H986c-3.7,0-5.4-1.6-5.4-4.8v-5.9c0.2-2.6,1.7-4.4,4.7-4.4 			c8.6-0.2,17.1-0.2,25.7,0c2.4-0.2,4.5,1.6,4.7,4c0,0.1,0,0.3,0,0.4c0,2,0.2,4,0,6.2c-0.2,3.1-1.8,4.5-5.2,4.7 			C1006.4-931.1,1002.2-931.1,998.1-931.1z"/> 		<path id="Pfad_2964" class="st1" d="M1031.7-849.1c6.6,0,11.8,5,11.8,10.9c0,5.9-5.4,10.9-11.8,10.9c-6.6,0-11.9-5-11.9-11 			C1020-844.2,1025.4-849.1,1031.7-849.1z"/> 		<path id="Pfad_2965" class="st1" d="M975.9-838c0,6.1-5.4,10.9-11.8,10.9c-6.4,0-11.8-5-11.9-10.9c0-6.1,5.4-11,11.9-11 			C970.7-848.9,975.9-844.1,975.9-838z"/> 	</g> 	<!--path id="Pfad_2966" class="st2" d="M2082,4793.9h219.4v220.7h18.6V4778h-238V4793.9z"/--> </g> </svg>
+        <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 viewBox="0 0 238 236.6" style="height: 1.5em;margin-right:-0.5em; margin-bottom:-0.2em; enable-background:new 0 0 238 236.6;" xml:space="preserve"> <style type="text/css"> 	.st0 {
+            fill: #0062AE;
+        }
+
+        .st1 {
+            fill: #FFFFFF;
+        }
+
+        .st2 {
+            fill: #0063AF;
+        } </style> <g id="Gruppe_5007" transform="translate(-2082 -4778)"> 	<g id="Gruppe_5004" transform="translate(1174.057 5785.434)"> 		<path id="Pfad_2959" class="st0" d="M1068.9-771.4v0.5h-15.6c-1.5,0.2-2.9-0.6-3.7-1.9c-6.4-8.9-12.9-17.6-19.3-26.3 			c-0.9-1.5-2.5-2.3-4.2-2.2h-55.8c-1.8-0.2-3.5,0.8-4.4,2.3l-19.2,26.1c-0.5,0.8-1.3,1.5-2.2,1.9c-5.5,0.2-11.1,0.2-17.1,0.2 			c10.6-14.6,20.7-28.8,31.1-43.1c-0.8-0.3-1.3-0.5-1.8-0.6c-10.9-3.3-18.7-12.4-18.7-23c-0.3-30-0.5-59.9-0.3-89.9 			c0-12.8,11.4-23.7,25.2-23.8c23.4-0.3,46.9-0.3,70.3,0c14,0.2,25.2,11,25.4,24c0.2,29.9,0.2,59.8,0,89.6 			c0,10.7-7.7,19.9-18.8,23.2c-0.6,0.2-1.1,0.4-1.7,0.6c0.5,0.6,0.7,1.1,1,1.6c9.6,13.2,19,26.5,28.6,39.7 			C1068-772.3,1068.5-771.9,1068.9-771.4z M998.1-885.2L998.1-885.2c10.8,0,21.3,0.2,32.1,0c8.7-0.2,13.8-4.8,13.8-12.9 			c0-5.1,0.2-10.1,0-15.2c-0.2-7.9-5.2-12.8-13.8-12.8c-21.5-0.2-43-0.2-64.4,0c-8.6,0-13.6,4.8-13.6,12.8c-0.2,4.7,0,9.3,0,13.8 			c0,9.8,4.7,14.3,15.3,14.3L998.1-885.2z M998.1-931.1h12.4c3.4,0,5-1.6,5.2-4.7c0.2-2.1,0.2-4.2,0-6.2c-0.2-2.6-1.7-4.4-4.7-4.4 			c-8.6-0.2-17.1-0.2-25.7,0c-3,0-4.5,1.7-4.7,4.4v5.9c0.2,3.3,1.8,4.8,5.4,4.8C989.9-931.1,993.9-931.1,998.1-931.1L998.1-931.1z 			 M1031.7-849.1c-6.6,0-11.8,4.8-11.9,10.7c-0.2,6.1,5.4,11.2,11.9,11c6.4,0,11.8-5,11.8-10.9 			C1043.5-844.1,1038.3-849.1,1031.7-849.1L1031.7-849.1z M975.9-838c0-6.1-5.2-10.9-11.6-11c-6.6,0-12.1,5-11.9,11 			c0,5.9,5.4,10.9,11.9,10.9C970.5-827.1,975.9-832.1,975.9-838z"/> 		<path id="Pfad_2960" class="st0" d="M990.2-967.9c2.5,1.4,4.9,3,5.2,5.9c0.5,3.6-1.7,6.5-5.4,7.6c-3.5,1-7.3-0.6-8.9-3.9 			c-1.5-3.2-0.3-7,2.9-8.7c0.7-0.3,1.3-0.8,2-1.1C987.4-968,988.8-967.9,990.2-967.9z"/> 		<path id="Pfad_2961" class="st0" d="M1009.9-967.9c3.2,1.4,5.5,3.6,5.5,7.2c0,3.3-2.5,5.9-6.1,6.5c-3.3,0.7-6.6-0.9-8.1-3.9 			c-1.5-3-0.5-6.5,2.2-8.4c0.7-0.5,1.5-0.9,2.4-1.4H1009.9z"/> 		<path id="Pfad_2962" class="st1" d="M998.1-885.2h-30.6c-10.6,0-15.3-4.5-15.3-14.3v-13.8c0.2-7.9,5-12.8,13.6-12.8 			c21.5-0.2,43-0.2,64.4,0c8.6,0,13.6,4.8,13.8,12.8c0.2,5.1,0,10.1,0,15.2c-0.2,8.1-5,12.8-13.8,12.9 			C1019.5-885.2,1008.7-885.3,998.1-885.2L998.1-885.2z"/> 		<path id="Pfad_2963" class="st1" d="M998.1-931.1H986c-3.7,0-5.4-1.6-5.4-4.8v-5.9c0.2-2.6,1.7-4.4,4.7-4.4 			c8.6-0.2,17.1-0.2,25.7,0c2.4-0.2,4.5,1.6,4.7,4c0,0.1,0,0.3,0,0.4c0,2,0.2,4,0,6.2c-0.2,3.1-1.8,4.5-5.2,4.7 			C1006.4-931.1,1002.2-931.1,998.1-931.1z"/> 		<path id="Pfad_2964" class="st1" d="M1031.7-849.1c6.6,0,11.8,5,11.8,10.9c0,5.9-5.4,10.9-11.8,10.9c-6.6,0-11.9-5-11.9-11 			C1020-844.2,1025.4-849.1,1031.7-849.1z"/> 		<path id="Pfad_2965" class="st1" d="M975.9-838c0,6.1-5.4,10.9-11.8,10.9c-6.4,0-11.8-5-11.9-10.9c0-6.1,5.4-11,11.9-11 			C970.7-848.9,975.9-844.1,975.9-838z"/> 	</g>
+            <!--path id="Pfad_2966" class="st2" d="M2082,4793.9h219.4v220.7h18.6V4778h-238V4793.9z"/--> </g> </svg>
         <span id="station-name">Tempelhof</span>
     </div>
     <div style="position: relative; width: 100%; margin: 1em 0">
         <a href="#" id="refresh" class="round-button">&#8634;</a>
-        <div class="tab">
-            <input id="tab-one" type="checkbox" name="tabs">
-            <label for="tab-one">Label One</label>
-            <div class="tab-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis
-                    nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum
-                    adipisci eum? Saepe, itaque.</p>
-            </div>
+        <div id="list-teams">
+
         </div>
-        <div class="tab">
-            <input id="tab-two" type="checkbox" name="tabs">
-            <label for="tab-two">Label One
-                <svg class="beer-bottle" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 463.729 463.729" style="enable-background:new 0 0 463.729 463.729;" xml:space="preserve"><path d="M290.904,212.333c-3.892-8.471-10.103-16.768-12.44-19.891c-0.292-0.391-0.505-0.672-0.622-0.839 c-0.061-0.089-0.155-0.221-0.282-0.396c-3.396-4.691-9.094-14.586-9.094-28.143c0-17.626-1.373-50.397-3.592-72.604 c-0.928-9.335-1.833-18.618-2.561-26.076c-0.701-7.183-1.099-11.256-1.349-13.634c1.513-1.991,2.716-4.048,2.716-6.509		c0-1.196-0.313-2.962-2.093-11.812c-0.168-0.832-0.353-1.751-0.534-2.66c0.735-0.546,1.349-1.257,1.775-2.082		c1.392-2.691,1.467-12.742-0.906-17.884C259.143,3.757,252.941,0,245.737,0h-27.748c-7.209,0-13.413,3.758-16.189,9.803		c-2.376,5.166-2.285,15.22-0.884,17.904c0.426,0.815,1.033,1.518,1.76,2.059c-0.178,0.891-0.359,1.789-0.523,2.605		c-1.795,8.896-2.11,10.672-2.11,11.872c0,2.474,1.206,4.532,2.725,6.521c-0.231,2.213-0.591,5.894-1.205,12.186		c-0.749,7.682-1.714,17.567-2.706,27.512c-2.218,22.3-3.59,55.05-3.59,72.604c0,13.562-5.694,23.455-9.088,28.146		c-0.126,0.174-0.22,0.306-0.286,0.401c-0.111,0.159-0.325,0.441-0.618,0.833c-2.337,3.122-8.546,11.418-12.444,19.885		c-4.588,9.97-4.031,23.751-3.929,25.671c0.015,6.101,0.396,168.259,0.398,178.069c-0.569,23.58,2.627,35.377,11.022,40.667		c9.941,6.486,41.949,6.992,51.542,6.992c9.595,0,41.608-0.505,51.545-6.994c8.396-5.294,11.589-17.088,11.012-40.666		c0.002-10.254,0.391-171.945,0.406-178.066C294.93,236.078,295.492,222.292,290.904,212.333z M282.839,237.437		c-0.008,0.124-0.013,0.247-0.013,0.371c-0.004,1.686-0.406,168.661-0.406,178.334c0,0.05,0.001,0.1,0.002,0.148		c0.543,21.905-2.656,28.571-5.436,30.307c-0.046,0.029-0.092,0.059-0.138,0.089c-3.688,2.444-20.706,5.043-44.985,5.043		s-41.298-2.599-44.985-5.043c-0.046-0.03-0.092-0.06-0.139-0.089c-2.778-1.734-5.977-8.399-5.442-30.309		c0.001-0.049,0.002-0.098,0.002-0.146c0-9.179-0.395-176.643-0.398-178.334c0-0.123-0.004-0.246-0.013-0.368		c-0.217-3.399-0.131-13.634,2.842-20.092c3.366-7.313,9.023-14.868,11.151-17.713c0.457-0.611,0.774-1.041,0.892-1.214l0.127-0.177		c4.245-5.866,11.366-18.237,11.366-35.18c0-17.269,1.35-49.483,3.531-71.415c0.993-9.952,1.958-19.847,2.708-27.536		c0.669-6.849,1.25-12.813,1.392-14.062c0.506-2.745-1.094-4.709-1.899-5.699c-0.181-0.221-0.498-0.61-0.775-0.978		c0.364-2.049,1.139-5.889,1.692-8.632c2.01-9.966,2.01-9.966,1.323-11.788c-0.597-1.583-1.809-2.793-3.291-3.416		c0.073-1.824,0.299-3.728,0.756-4.724c0.954-2.077,3.444-2.814,5.286-2.814h27.748c1.928,0,4.328,0.74,5.286,2.824		c0.456,0.988,0.682,2.891,0.756,4.717c-1.464,0.618-2.665,1.809-3.267,3.369c-0.71,1.841-0.71,1.841,1.311,11.887		c0.548,2.726,1.315,6.538,1.678,8.577c-0.277,0.368-0.594,0.76-0.773,0.981c-0.805,0.996-2.398,2.967-1.889,5.705		c0.151,1.343,0.793,7.928,1.531,15.489c0.729,7.464,1.635,16.755,2.563,26.101c2.183,21.842,3.533,54.075,3.533,71.414		c0,16.939,7.126,29.313,11.374,35.18l0.101,0.138c0.144,0.211,0.46,0.641,0.917,1.252c2.129,2.844,7.784,10.397,11.145,17.715		C282.954,223.757,283.05,234.027,282.839,237.437z"/>	<path d="M194.079,241.838c3.304-0.206,5.817-3.053,5.616-6.356c-0.13-2.155-0.074-8.604,1.725-12.514		c2.165-4.703,5.861-9.642,7.253-11.501c0.336-0.448,0.566-0.764,0.672-0.918c1.864-2.74,1.167-6.492-1.572-8.357		c-2.739-1.862-6.458-1.174-8.322,1.566c-0.076,0.107-0.208,0.282-0.385,0.518c-1.6,2.138-5.849,7.815-8.546,13.675		c-3.389,7.362-2.87,17.19-2.8,18.287c0.203,3.176,2.841,5.611,5.98,5.611C193.827,241.85,193.953,241.846,194.079,241.838z"/>	<path d="M275.15,409.979c0-0.68-0.019-2.31-0.048-4.782c-0.09-7.576-0.275-23.341-0.275-43.853c0-3.313-2.687-6-6-6h-72.415		c-3.314,0-6,2.687-6,6c0,20.512-0.186,36.276-0.275,43.853c-0.029,2.472-0.048,4.103-0.048,4.782v1.264		c-0.003,20.151-0.004,27.691,6.805,29.805c4.811,1.493,20.345,2.246,32.774,2.314h5.903c0.011,0,0.021,0,0.033,0		c12.396-0.068,27.93-0.821,32.742-2.314c6.808-2.113,6.807-9.653,6.804-29.805V409.979z"/></svg>
-            </label>
-            <div class="tab-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis
-                    nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum
-                    adipisci eum? Saepe, itaque.</p>
-            </div>
-        </div>
-    </div>
-    <div id="new-team">
-        <a href="#" class="round-button">+</a>
-        <input type="text" placeholder="Team Name"/>
-        <input type="text" placeholder="Secret"/>
-        <div style="clear:both"></div>
     </div>
 </div>
 <script>
     var Ringbahn = function (target) {
         this.svg = document.getElementById(target);
+        this.startStation = 0;
         this.currentCursorPos = 0;
+        this.currentDieFace = 3;
     };
 
     Ringbahn.stations = ['Gesundbrunnen', 'Schönhauser Allee', 'Prenzlauer Allee', 'Greifswalder Straße', 'Landsberger Allee',
@@ -206,6 +451,7 @@
         'Tempelhof', 'Südkreuz', 'Schöneberg', 'Innsbrucker Platz', 'Bundesplatz', 'Heidelberger Platz', 'Hohenzollerndamm',
         'Halensee', 'Westkreuz', 'Messe Nord/ICC', 'Westend', 'Jungfernheide', 'Beusselstraße', 'Westhafen'];
     Ringbahn.radius = 45;
+    Ringbahn.dieFaces = ['&#9856;', '&#9857;', '&#9858;', '&#9859;', '&#9860;', '&#9861;'];
 
     Ringbahn.prototype.init = function () {
         var svgns = 'http://www.w3.org/2000/svg';
@@ -258,7 +504,8 @@
             diceTxtShape.setAttributeNS(null, 'text-anchor', 'middle');
             diceTxtShape.setAttributeNS(null, 'style', 'font-size: 1em; fill: whitesmoke; transform:translate(0,0.35em)');
             diceTxtShape.setAttribute('class', 'dice');
-            diceTxtShape.appendChild(document.createTextNode('⚄'));
+            diceTxtShape.appendChild(document.createTextNode(''));
+            diceTxtShape.innerHTML = Ringbahn.dieFaces[that.currentDieFace - 1];
             that.svg.appendChild(diceTxtShape);
 
             return [diceShape, diceTxtShape];
@@ -302,12 +549,34 @@
             }
         }
     };
-
+    Ringbahn.prototype.setStart = function (stationName) {
+        this.startStation = Ringbahn.stationId(stationName);
+    };
     Ringbahn.prototype.setDiceFunction = function (func) {
         this.diceButton[0].addEventListener('click', func);
         this.diceButton[1].addEventListener('click', func);
     };
-
+    Ringbahn.prototype.startDiceShake = function () {
+        this.diceButton[1].classList.add('shake');
+        var that = this;
+        this.shakeAnimation = setInterval(function () {
+            that.setDiceFace(Math.floor(Math.random() * 6) + 1, true);
+        }, 200);
+    };
+    Ringbahn.prototype.stopDiceShake = function () {
+        var that = this;
+        setTimeout(function () {
+            that.diceButton[1].classList.remove('shake');
+            clearInterval(that.shakeAnimation);
+            that.setDiceFace(that.currentDieFace, true);
+        }, 200);
+    };
+    Ringbahn.prototype.setDiceFace = function (i, brainless) {
+        if (!brainless) {
+            this.currentDieFace = i;
+        }
+        this.diceButton[1].innerHTML = Ringbahn.dieFaces[i - 1];
+    };
     Ringbahn.prototype.setCursor = function (i) {
         Ringbahn.setLinePos(this.stationCursor, Ringbahn.perc2rad(Ringbahn.i2perc(i)), 0, Ringbahn.radius);
     };
@@ -338,18 +607,276 @@
         }
     };
 
+    function _API(baseurl) {
+        var url = window.location.href;
+        this.baseurl = baseurl || url.replace('/index.html', '').replace('/#', '');
+        this.pendingRequests = {};
+    }
+    _API.parseResponse = function (response) {
+        try {
+            return JSON.parse(response);
+        } catch (e) {
+            return response;
+        }
+    };
+    _API.prototype.get = function (path) {
+        var url = this.baseurl + path;
+
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        var result = _API.parseResponse(this.responseText);
+                        resolve(result);
+                    } else {
+                        reject('Error ' + this.status + ' ' + this.statusText);
+                    }
+                }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+        });
+    };
+    _API.routes = {
+        'roll': '/Game.php?t=roll&g={{game}}&name={{name}}&secret={{secret}}',
+        'newTeam': '/Game.php?t=newTeam&g={{game}}&name={{name}}&secret={{secret}}',
+        'info': '/Game.php?t=info&g={{game}}',
+        'games': '/Game.php?t=games',
+        getPath: function (route, params) {
+            params = params || {};
+            return _API.routes[route].replace(/{{(.*?)}}/g, function (m, param) {
+                if (!(param in params) || !params[param])
+                    throw new ReferenceError('Parameter "' + param + '" required for ' + route + ' but not defined!');
+                return encodeURIComponent(params[param])
+            });
+        }
+    };
+
+    _API.prototype.rollDice = function (game, tname, tsecret) {
+        return this.get(_API.routes.getPath('roll', {'game': game, 'name': tname, 'secret': tsecret}));
+    };
+    _API.prototype.addTeam = function (game, tname, tsecret) {
+        return this.get(_API.routes.getPath('newTeam', {'game': game, 'name': tname, 'secret': tsecret}));
+    };
+    _API.prototype.getInfo = function (game) {
+        return this.get(_API.routes.getPath('info', {'game': game}));
+    };
+    _API.prototype.getGames = function () {
+        return this.get(_API.routes.getPath('games'));
+    };
+
+    var Keks = {
+        'set': function (cname, cvalue, days) {
+            var d = new Date();
+            d.setTime(d.getTime() + ((days || 3) * 24 * 60 * 60 * 1000)); // lives for 3 days
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        },
+        'get': function (cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return null;
+        },
+        'del': function (cname) {
+            Keks.set(cname, '', -1);
+        }
+    };
+
+    var Game = function () {
+        this.modal = document.getElementById('modal');
+        this.stationName = document.getElementById('station-name');
+        this.teamList = document.getElementById('list-teams');
+        document.getElementById('refresh').addEventListener('click', this.refresh);
+        document.getElementById('nav-pick-game').addEventListener('click', this.pickGameModal());
+        document.getElementById('nav-pick-team').addEventListener('click', this.pickTeamModal());
+        document.getElementById('nav-new-team').addEventListener('click', this.newTeamModal());
+        document.getElementById('nav-reset').addEventListener('click', this.resetCookies);
+        ringbahn.setDiceFunction(this.rollDice);
+    };
+
+    Game.prototype.rollDice = function (evt) {
+        try {
+            ringbahn.startDiceShake();
+            API.rollDice(Keks.get('game'), Keks.get('teamName'), Keks.get('teamSecret')).then(function (result) {
+                console.log(result);
+                if (result.hasOwnProperty('steps')) {
+                    ringbahn.setDiceFace(result.steps);
+                    game.refresh();
+                }
+                ringbahn.stopDiceShake();
+            }).catch(function (error) {
+                console.warn(error);
+                // TODO show error
+                ringbahn.stopDiceShake();
+            });
+        } catch (e) {
+            console.warn(e);
+            ringbahn.stopDiceShake();
+        }
+    };
+
+    Game.prototype.addTeam = function () {
+        var name = document.getElementById('team-name-input').value;
+        var secret = document.getElementById('team-secret-input').value;
+        var that = this;
+        if (!!name && !!secret) {
+            API.addTeam(Keks.get('game'), name, secret).then(function (result) {
+                Keks.set('teamName', name);
+                Keks.set('teamSecret', secret);
+                console.log(result);
+                that.hideModal();
+            }).catch(function (error) {
+                console.warn(error);
+                // TODO show warning
+            });
+        }
+    };
+
+    Game.prototype.pickGame = function (game) {
+        Keks.set('game', game);
+        this.hideModal();
+        this.refresh();
+    };
+    Game.prototype.pickTeam = function (team) {
+        Keks.set('teamName', team);
+        Keks.set('teamSecret', document.getElementById('team-secret-input').value);
+        this.hideModal();
+        this.refresh();
+    };
+
+    Game.prototype.pickGameModal = function () {
+        var that = this;
+        return function () {
+            API.getGames().then(function (result) {
+                console.log(result);
+                var html = '<ul class="picklist">';
+                var currGame = Keks.get('game');
+                result.forEach(function (g) {
+                    html += '<li><a href="javascript:game.pickGame(\'' + g + '\')">' + ((currGame === g) ? '&#10004;&nbsp;&nbsp;' : '') + g + '</a></li>';
+                });
+                html += '</ul>';
+                that.openModal(html);
+                // '<a href="javascript:game.addTeam()" class="round-button">&#10004;</a>'
+            }).catch(function (error) {
+                console.warn(error);
+            });
+        };
+    };
+    Game.prototype.pickTeamModal = function () {
+        var that = this;
+        return function () {
+            API.getInfo(Keks.get('game')).then(function (result) {
+                console.log(result);
+                var html = '<ul class="picklist">';
+                html += '<li><input type="text" id="team-secret-input" placeholder="Secret"/></li>';
+                var currTeam = Keks.get('teamName');
+                for (var key in result.teams) {
+                    html += '<li><a href="javascript:game.pickTeam(\'' + result.teams[key].name + '\')">' +
+                        ((currTeam === result.teams[key].name) ? '&#10004;&nbsp;&nbsp;' : '') + result.teams[key].name +
+                        '</a></li>';
+                }
+                html += '</ul>';
+                that.openModal(html);
+                // '<a href="javascript:game.addTeam()" class="round-button">&#10004;</a>'
+            }).catch(function (error) {
+                console.warn(error);
+            });
+        };
+    };
+    Game.prototype.newTeamModal = function () {
+        var that = this;
+        return function () {
+            that.openModal('' +
+                '<div id="new-team">' +
+                '<input type="text" id="team-name-input" placeholder="Team Name"/>' +
+                '<input type="text" id="team-secret-input" placeholder="Secret"/>' +
+                '<a href="javascript:game.addTeam()" class="round-button">+</a>' +
+                '<div style="clear:both"></div>' +
+                '</div>');
+        };
+    };
+
+    Game.prototype.resetCookies = function (evt) {
+        Keks.del('teamName');
+        Keks.del('teamSecret');
+        Keks.del('game');
+        console.log('killed cookies');
+        console.log(document.cookie);
+    };
+
+    Game.prototype.refresh = function (evt) {
+        var that = game;
+        API.getInfo(Keks.get('game')).then(function (result) {
+            var beer = '<svg class="beer-bottle" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 463.729 463.729" style="enable-background:new 0 0 463.729 463.729;" xml:space="preserve"><path d="M290.904,212.333c-3.892-8.471-10.103-16.768-12.44-19.891c-0.292-0.391-0.505-0.672-0.622-0.839 c-0.061-0.089-0.155-0.221-0.282-0.396c-3.396-4.691-9.094-14.586-9.094-28.143c0-17.626-1.373-50.397-3.592-72.604 c-0.928-9.335-1.833-18.618-2.561-26.076c-0.701-7.183-1.099-11.256-1.349-13.634c1.513-1.991,2.716-4.048,2.716-6.509		c0-1.196-0.313-2.962-2.093-11.812c-0.168-0.832-0.353-1.751-0.534-2.66c0.735-0.546,1.349-1.257,1.775-2.082		c1.392-2.691,1.467-12.742-0.906-17.884C259.143,3.757,252.941,0,245.737,0h-27.748c-7.209,0-13.413,3.758-16.189,9.803		c-2.376,5.166-2.285,15.22-0.884,17.904c0.426,0.815,1.033,1.518,1.76,2.059c-0.178,0.891-0.359,1.789-0.523,2.605		c-1.795,8.896-2.11,10.672-2.11,11.872c0,2.474,1.206,4.532,2.725,6.521c-0.231,2.213-0.591,5.894-1.205,12.186		c-0.749,7.682-1.714,17.567-2.706,27.512c-2.218,22.3-3.59,55.05-3.59,72.604c0,13.562-5.694,23.455-9.088,28.146		c-0.126,0.174-0.22,0.306-0.286,0.401c-0.111,0.159-0.325,0.441-0.618,0.833c-2.337,3.122-8.546,11.418-12.444,19.885		c-4.588,9.97-4.031,23.751-3.929,25.671c0.015,6.101,0.396,168.259,0.398,178.069c-0.569,23.58,2.627,35.377,11.022,40.667		c9.941,6.486,41.949,6.992,51.542,6.992c9.595,0,41.608-0.505,51.545-6.994c8.396-5.294,11.589-17.088,11.012-40.666		c0.002-10.254,0.391-171.945,0.406-178.066C294.93,236.078,295.492,222.292,290.904,212.333z M282.839,237.437		c-0.008,0.124-0.013,0.247-0.013,0.371c-0.004,1.686-0.406,168.661-0.406,178.334c0,0.05,0.001,0.1,0.002,0.148		c0.543,21.905-2.656,28.571-5.436,30.307c-0.046,0.029-0.092,0.059-0.138,0.089c-3.688,2.444-20.706,5.043-44.985,5.043		s-41.298-2.599-44.985-5.043c-0.046-0.03-0.092-0.06-0.139-0.089c-2.778-1.734-5.977-8.399-5.442-30.309		c0.001-0.049,0.002-0.098,0.002-0.146c0-9.179-0.395-176.643-0.398-178.334c0-0.123-0.004-0.246-0.013-0.368		c-0.217-3.399-0.131-13.634,2.842-20.092c3.366-7.313,9.023-14.868,11.151-17.713c0.457-0.611,0.774-1.041,0.892-1.214l0.127-0.177		c4.245-5.866,11.366-18.237,11.366-35.18c0-17.269,1.35-49.483,3.531-71.415c0.993-9.952,1.958-19.847,2.708-27.536		c0.669-6.849,1.25-12.813,1.392-14.062c0.506-2.745-1.094-4.709-1.899-5.699c-0.181-0.221-0.498-0.61-0.775-0.978		c0.364-2.049,1.139-5.889,1.692-8.632c2.01-9.966,2.01-9.966,1.323-11.788c-0.597-1.583-1.809-2.793-3.291-3.416		c0.073-1.824,0.299-3.728,0.756-4.724c0.954-2.077,3.444-2.814,5.286-2.814h27.748c1.928,0,4.328,0.74,5.286,2.824		c0.456,0.988,0.682,2.891,0.756,4.717c-1.464,0.618-2.665,1.809-3.267,3.369c-0.71,1.841-0.71,1.841,1.311,11.887		c0.548,2.726,1.315,6.538,1.678,8.577c-0.277,0.368-0.594,0.76-0.773,0.981c-0.805,0.996-2.398,2.967-1.889,5.705		c0.151,1.343,0.793,7.928,1.531,15.489c0.729,7.464,1.635,16.755,2.563,26.101c2.183,21.842,3.533,54.075,3.533,71.414		c0,16.939,7.126,29.313,11.374,35.18l0.101,0.138c0.144,0.211,0.46,0.641,0.917,1.252c2.129,2.844,7.784,10.397,11.145,17.715		C282.954,223.757,283.05,234.027,282.839,237.437z"/>	<path d="M194.079,241.838c3.304-0.206,5.817-3.053,5.616-6.356c-0.13-2.155-0.074-8.604,1.725-12.514		c2.165-4.703,5.861-9.642,7.253-11.501c0.336-0.448,0.566-0.764,0.672-0.918c1.864-2.74,1.167-6.492-1.572-8.357		c-2.739-1.862-6.458-1.174-8.322,1.566c-0.076,0.107-0.208,0.282-0.385,0.518c-1.6,2.138-5.849,7.815-8.546,13.675		c-3.389,7.362-2.87,17.19-2.8,18.287c0.203,3.176,2.841,5.611,5.98,5.611C193.827,241.85,193.953,241.846,194.079,241.838z"/>	<path d="M275.15,409.979c0-0.68-0.019-2.31-0.048-4.782c-0.09-7.576-0.275-23.341-0.275-43.853c0-3.313-2.687-6-6-6h-72.415		c-3.314,0-6,2.687-6,6c0,20.512-0.186,36.276-0.275,43.853c-0.029,2.472-0.048,4.103-0.048,4.782v1.264		c-0.003,20.151-0.004,27.691,6.805,29.805c4.811,1.493,20.345,2.246,32.774,2.314h5.903c0.011,0,0.021,0,0.033,0		c12.396-0.068,27.93-0.821,32.742-2.314c6.808-2.113,6.807-9.653,6.804-29.805V409.979z"/></svg>';
+            var start = result.start;
+            var startId = Ringbahn.stationId(start);
+            var t = null;
+            var l = null;
+            var tmp = null;
+            var currTeam = Keks.get('teamName');
+            var html = '';
+            var cnt = 0;
+            for (var key in result.teams) {
+                t = result.teams[key];
+                console.log(t);
+                if (t.name === currTeam) {
+                    l = t.stops[t.stops.length - 1];
+                    that.stationName.innerHTML = sn(l.stop);
+                    ringbahn.setDiceFace(l.rolled_steps);
+                    ringbahn.setCursor(si(l.stop));
+                }
+                html += '<div class="tab">';
+                html += '<input id="tab-' + cnt + '" type="checkbox" name="tabs">';
+                html += '<label for="tab-' + cnt + '">' + t.name + '&nbsp;' + beer.repeat(t.stops.length - 1) + '</label>';
+                html += '<div class="tab-content"><ol>';
+                for (var i in t.stops) {
+                    tmp = t.stops[i];
+                    html += '<li style="line-height:1.6em;">' + sn(tmp.stop) + '&nbsp;' + (Ringbahn.dieFaces[tmp.rolled_steps - 1] || '') + '</li>';
+                }
+                html += '</ol></div></div>';
+                cnt++;
+            }
+            that.teamList.innerHTML = html;
+
+            function si(sii) {
+                return (sii + startId) % Ringbahn.stations.length;
+            }
+            function sn(sii) {
+                return Ringbahn.stations[si(sii)];
+            }
+        }).catch(function (error) {
+            console.warn(error);
+        });
+
+
+    };
+
+    Game.prototype.openModal = function (html) {
+        document.getElementById('nav-check').checked = false;
+        this.modal.innerHTML = html + '<a href="javascript:game.hideModal()" id="close-modal">&#10006;</a>';
+        this.modal.style.display = 'block';
+    };
+    Game.prototype.hideModal = function () {
+        this.modal.style.display = 'none';
+    };
+
+    var API = new _API();
+
     var ringbahn = new Ringbahn('ringbahn-svg');
     ringbahn.init();
-    ringbahn.setCursor(12);
-    /*
-     var cnt = 0;
-     setInterval(function() {
-     ringbahn.setCursor(cnt);
-     cnt++;
-     }, 500);*/
-    ringbahn.setDiceFunction(function (evt) {
-        console.log('huiii')
-    });
+
+    var game = new Game();
+    game.refresh();
 
 </script>
 </body>

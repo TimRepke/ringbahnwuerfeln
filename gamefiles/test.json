@@ -17,6 +17,42 @@
                     "beer_size": 0.5
                 }
             ]
+        },
+        "Brot": {
+            "name": "Brot",
+            "secret": "secret",
+            "stops": [
+                {
+                    "stop": 0,
+                    "beer_size": 0,
+                    "rolled_time": 1511546612,
+                    "rolled_steps": 0
+                },
+                {
+                    "stop": 5,
+                    "rolled_time": 1511547302,
+                    "rolled_steps": 5,
+                    "beer_size": 0.5
+                },
+                {
+                    "stop": 9,
+                    "rolled_time": 1511548726,
+                    "rolled_steps": 4,
+                    "beer_size": 0.5
+                },
+                {
+                    "stop": 14,
+                    "rolled_time": 1511549809,
+                    "rolled_steps": 5,
+                    "beer_size": 0.5
+                },
+                {
+                    "stop": 15,
+                    "rolled_time": 1511550425,
+                    "rolled_steps": 1,
+                    "beer_size": 0.33
+                }
+            ]
         }
     },
     "name": "Test",

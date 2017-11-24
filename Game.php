@@ -50,6 +50,7 @@ class Game {
     }
     
     private function render_error($msg) {
+        http_response_code(400);
         $ret = [
             'error' => $msg,
             'params' => []
@@ -141,7 +142,7 @@ class Game {
         $games = [];
         foreach (scandir($this->path) as $file) {
             if(!in_array($file,['.htaccess', 'adminToken', '.', '..'])){
-                array_push($games, $file);
+                array_push($games, str_replace('.json', '',$file));
             }
         }
         $this->render_response($games);
