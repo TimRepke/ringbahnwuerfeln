@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 class Game {
     
@@ -15,7 +17,7 @@ class Game {
     
     private function load_game_file_path() {
         $fname = preg_replace("/[^a-z0-9 ]/", '', strtolower($this->name));;
-        $filename = $this->path . '/' . $fname . '.json';
+        $filename = '/'.$this->path . '/' . $fname . '.json';
         if (!file_exists($filename) && isset($_GET['start']) && $this->has_admin_rights()) {
             file_put_contents($filename, '{
                 "teams": {},
@@ -23,7 +25,7 @@ class Game {
                 "start": "'.$_GET['start'].'"
             }');
         }
-        return realpath($filename);
+        return __DIR__.$filename;
     }
     
     private function has_admin_rights() {

@@ -377,10 +377,102 @@
             transform: none;
         }
 
+        /* https://codepen.io/anon/pen/POBGXo */
+        #toast {
+            visibility: hidden;
+            max-width: 50px;
+            height: 50px;
+            margin: auto;
+            background-color: #CE3175;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            position: fixed;
+            z-index: 800;
+            left: 0;
+            right:0;
+            top: 30px;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+        #toast #toast-img{
+            width: 50px;
+            height: 50px;
+            float: left;
+            background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAZCAYAAAAmNZ4aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QsZFh0zExqZSwAABHRJREFUSMe1lmlsVFUUx3/3zZsZZ6YdulA7paVTENppWEyAUmhjKEuVqIEIkoIEkUTlg0uIiZIYJGkx0bikkUhoDHukHzCCBoWACqGIQkOjLRKFCKWlDIhQbFMYyizHD2+GeR1mUpZwk5t773v3nP/5/8+Z8wbuY5QWkv7uYt5YPofXmg8fzhcRDUACAR7KGJEHgFr/FrUXdyI93yObP66RE63+uffqS7uXy+0XYeoYistLWel2gqagwvMNRw9uWCUiuQ8FuG6ZsS6dzdaS4djDYZAI5Lr78Vp3T9q5Y88iEdHuVu67Bl69GeZU8OrC6ZSHw4AY06KB13kca+DnurbjbXnK4birXA8KPLbo9rZg1RI+1DXQNYiBWy1QOFTQLm9P777S+RmAcjgeHPiPc0ZBNa6itriAzFAIvvsVFtTC83XwdRNYdago6uRU86b5Vy9eWwjw36VLD17NdS9RdWIjfb27Ef8OpKw4JjSSm4l0fYnc+BY5sxFZ+8mnfhHJHOznNSjjyjG4fIWsHOHBBQZcfyj+/uYt6AsYhZaXBcOu13t+2n+kbjDJUwJPLjHWMh/zy33MlogBqoB0kz+lwGU3gEMhmFHiVx0tDTVtbV3l95Xj5lMA5NZUse7RDMMxEcMg3TnQgcsGIsZZVxFKXQdyOk7ufaenR/QrXV33LvW6N9k2roi0YDD6QIym4U5g7LRHMx4xnvmy/fSd3zPP3946e2hBQdJcpwR+rpIFNdOYFok6izlVgNvE2GIBuy2qSLTk7FZ4jF38/WfzdhGxKYeDW729gwNnuMheMY+3dQ27mQliGJgZpz8SfxcLMByGCSPgWusH7qaDRxsAbG73oMCq9kWWjB5GmabiLGIBaAqGmBhnpEUDSwgwcAueKWmn7UD9C1f/DT4F8E9Hx207PRF18Uxyxo9kzRAnhCMDmcQiHeKK3890DQSMrQLYdHjSs8feuO3zlSJyVCnVk5LxWC9rK0pJC0cS2JqkzjIBZ8UYm8Gj7EUgx9lHUWjX9P17m+aJCDe6u+PAc6YaNk9PZu6i6dQEQwmApiBEwJsDOW6jomeNB3PVJ06rBqPsx+jt/HH1+XZ/rjMrCwkEUCay2b/U0/L4SLzmr4+ZbWyGw/D7WaNrVfruTEfiWQn8cM5HYXXDhklPVL3Sefp0XOovVvBecT6Fd4AmmboFuvug5QxcDxgFl0xq83lG/l8c2bflZbkZqiosLjaKa1k15ZWl1Nh1lEgStglMGg/B8vXGvmEfnKw3wCWSoJC50Kww2bKFHV9VbxKRUdqz5VirJ7AiLxOPyMB8JjpAjH7cdi6en8s9cKoLLKQINOozFIaJXuhvfd/bdKhljZadTtVUHwttegq5EgLRFcwtA0+GcV4wBUry438MiKRO0c0gzBx+Wjt7bOvrejCEJyvNKG+lkrWTqLNYM1FQMRp++wiCIUizgVVFPxKmO7fZJwyHJUx/7wW3qhqLdaLPUTdl4rglSndlIhI3SgQlifwk2ae4owT6VC5Dxy+98D/lgevQC5w2lAAAAABJRU5ErkJggg==');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #AE1155;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            box-sizing: border-box;
+            color: #fff;
+        }
+        #toast #toast-desc{
+            color: #fff;
+            padding: 16px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {top: 0; opacity: 0;}
+            to {top: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {top: 0; opacity: 0;}
+            to {top: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes expand {
+            from {min-width: 50px}
+            to {min-width: 350px}
+        }
+
+        @keyframes expand {
+            from {min-width: 50px}
+            to {min-width: 350px}
+        }
+        @-webkit-keyframes stay {
+            from {min-width: 350px}
+            to {min-width: 350px}
+        }
+
+        @keyframes stay {
+            from {min-width: 350px}
+            to {min-width: 350px}
+        }
+        @-webkit-keyframes shrink {
+            from {min-width: 350px;}
+            to {min-width: 50px;}
+        }
+
+        @keyframes shrink {
+            from {min-width: 350px;}
+            to {min-width: 50px;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {top: 30px; opacity: 1;}
+            to {top: 60px; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {top: 30px; opacity: 1;}
+            to {top: 60px; opacity: 0;}
+        }
     </style>
 </head>
 <body>
 <div id="modal" style="display: none"></div>
+<div id="toast"><div id="toast-img"></div><div id="toast-desc">A notification message..</div></div>
 <div role="navigation">
     <div id="menuToggle">
         <!--
@@ -404,10 +496,10 @@
         but hey, it's pure CSS magic.
         -->
         <ul id="menu">
-            <li><a href="#" id="nav-pick-game">Pick Game</a></li>
-            <li><a href="#" id="nav-pick-team">Pick Team</a></li>
-            <li><a href="#" id="nav-new-team">New Team</a></li>
-            <li><a href="#" id="nav-reset">Kill Cookie</a></li>
+            <li><a href="#" id="nav-pick-game">Tour wählen</a></li>
+            <li><a href="#" id="nav-pick-team">Team wählen</a></li>
+            <li><a href="#" id="nav-new-team">Neues Team</a></li>
+            <li><a href="#" id="nav-reset">Kekse aufessen</a></li>
         </ul>
     </div>
 </div>
@@ -464,6 +556,7 @@
         this.stationShapes = Ringbahn.stations.map(function (station, i, stations) {
             return drawStation(i / stations.length, station);
         });
+        this.setCursor(12);
 
         function drawStationCursor() {
             var stationCursor = document.createElementNS(svgns, 'line');
@@ -575,7 +668,7 @@
         if (!brainless) {
             this.currentDieFace = i;
         }
-        this.diceButton[1].innerHTML = Ringbahn.dieFaces[i - 1];
+        this.diceButton[1].innerHTML = Ringbahn.dieFaces[(i<=0) ? 4: i - 1];
     };
     Ringbahn.prototype.setCursor = function (i) {
         Ringbahn.setLinePos(this.stationCursor, Ringbahn.perc2rad(Ringbahn.i2perc(i)), 0, Ringbahn.radius);
@@ -590,7 +683,7 @@
     };
     Ringbahn.stationId = function (name) {
         var tmp = Ringbahn.stations.indexOf(name);
-        return (tmp) >= 0 ? tmp : 0;
+        return (tmp) >= 0 ? tmp : 12;
     };
     Ringbahn.i2perc = function (i) {
         return i / Ringbahn.stations.length;
@@ -646,8 +739,16 @@
         getPath: function (route, params) {
             params = params || {};
             return _API.routes[route].replace(/{{(.*?)}}/g, function (m, param) {
-                if (!(param in params) || !params[param])
+                if (!(param in params) || !params[param]) {
                     console.warn('Parameter "' + param + '" required for ' + route + ' but not defined!');
+                    if (param === 'game')
+                        Toastbrot.show('Tour auswählen!');
+                    if (param === 'name')
+                        Toastbrot.show('Team auswählen!');
+                    if (param === 'secret')
+                        Toastbrot.show('Teamgeheimnis setzen!');
+                    return null;
+                }
                 return encodeURIComponent(params[param])
             });
         }
@@ -716,7 +817,7 @@
                 ringbahn.stopDiceShake();
             }).catch(function (error) {
                 console.warn(error);
-                // TODO show error
+                Toastbrot.show('Team und Geheimnis setzen!');
                 ringbahn.stopDiceShake();
             });
         } catch (e) {
@@ -737,8 +838,10 @@
                 that.hideModal();
             }).catch(function (error) {
                 console.warn(error);
-                // TODO show warning
+                Toastbrot.show('Team und Geheimnis falsch!');
             });
+        } else {
+            Toastbrot.show('Team und Geheimnis setzen!');
         }
     };
 
@@ -775,22 +878,26 @@
     Game.prototype.pickTeamModal = function () {
         var that = this;
         return function () {
-            API.getInfo(Keks.get('game')).then(function (result) {
-                console.log(result);
-                var html = '<ul class="picklist">';
-                html += '<li><input type="text" id="team-secret-input" placeholder="Secret"/></li>';
-                var currTeam = Keks.get('teamName');
-                for (var key in result.teams) {
-                    html += '<li><a href="javascript:game.pickTeam(\'' + result.teams[key].name + '\')">' +
-                        ((currTeam === result.teams[key].name) ? '&#10004;&nbsp;&nbsp;' : '') + result.teams[key].name +
-                        '</a></li>';
-                }
-                html += '</ul>';
-                that.openModal(html);
-                // '<a href="javascript:game.addTeam()" class="round-button">&#10004;</a>'
-            }).catch(function (error) {
-                console.warn(error);
-            });
+            if (!Keks.get('game')) {
+                Toastbrot.show('Tour wählen!');
+            } else {
+                API.getInfo(Keks.get('game')).then(function (result) {
+                    console.log(result);
+                    var html = '<ul class="picklist">';
+                    html += '<li><input type="text" id="team-secret-input" placeholder="Secret"/></li>';
+                    var currTeam = Keks.get('teamName');
+                    for (var key in result.teams) {
+                        html += '<li><a href="javascript:game.pickTeam(\'' + result.teams[key].name + '\')">' +
+                            ((currTeam === result.teams[key].name) ? '&#10004;&nbsp;&nbsp;' : '') + result.teams[key].name +
+                            '</a></li>';
+                    }
+                    html += '</ul>';
+                    that.openModal(html);
+                    // '<a href="javascript:game.addTeam()" class="round-button">&#10004;</a>'
+                }).catch(function (error) {
+                    console.warn(error);
+                });
+            }
         };
     };
     Game.prototype.newTeamModal = function () {
@@ -868,6 +975,20 @@
     };
     Game.prototype.hideModal = function () {
         this.modal.style.display = 'none';
+    };
+
+    var Toastbrot = {
+        'elemText': document.getElementById('toast-desc'),
+        'elem': document.getElementById('toast'),
+        'show': function(msg) {
+            this.elem.classList.add('show');
+            this.elemText.innerHTML = msg;
+            console.log(msg);
+            var that = this;
+            setTimeout(function(){
+                that.elem.classList.remove('show');
+            }, 5000);
+        }
     };
 
     var API = new _API();

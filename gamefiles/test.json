@@ -51,6 +51,12 @@
                     "rolled_time": 1511550425,
                     "rolled_steps": 1,
                     "beer_size": 0.33
+                },
+                {
+                    "stop": 20,
+                    "rolled_time": 1511651707,
+                    "rolled_steps": 5,
+                    "beer_size": 0.5
                 }
             ]
         }
