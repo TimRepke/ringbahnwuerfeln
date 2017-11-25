@@ -813,6 +813,8 @@
                 if (result.hasOwnProperty('steps')) {
                     ringbahn.setDiceFace(result.steps);
                     game.refresh();
+                } else {
+                    Toastbrot.show('Ruhig, Brauner.')
                 }
                 ringbahn.stopDiceShake();
             }).catch(function (error) {
