@@ -43,7 +43,12 @@ class Game {
     
     private function save_game_file() {
         $json_string = json_encode($this->game, JSON_PRETTY_PRINT);
-        file_put_contents($this->game_file_path, $json_string);
+        if (strlen($json_string) < 2000000){
+            file_put_contents($this->game_file_path, $json_string);
+        } else {
+            $this->render_error('FILE_TOO_LARGE');
+        }
+        
     }
     
     public function render_response($obj) {
