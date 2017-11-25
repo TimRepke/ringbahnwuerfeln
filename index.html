@@ -17,7 +17,7 @@
         }
 
         #wrapper {
-            width: 100%;
+            width: 98vw;
             max-width: 400px;
             margin: -1em auto 1em auto;
             padding: 5px;
@@ -265,7 +265,7 @@
          * prefixes.
          * https://codepen.io/anon/pen/GOGdbJ
          */
-        nav {
+        div[role=navigation] {
             margin: 0;
             padding: 0;
         }
@@ -381,7 +381,7 @@
 </head>
 <body>
 <div id="modal" style="display: none"></div>
-<nav role="navigation">
+<div role="navigation">
     <div id="menuToggle">
         <!--
         A fake / hidden checkbox is used as click reciever,
@@ -410,7 +410,7 @@
             <li><a href="#" id="nav-reset">Kill Cookie</a></li>
         </ul>
     </div>
-</nav>
+</div>
 <div id="wrapper">
     <div id="ringbahn">
         <svg id="ringbahn-svg" viewBox="0 0 100 100">
@@ -647,7 +647,7 @@
             params = params || {};
             return _API.routes[route].replace(/{{(.*?)}}/g, function (m, param) {
                 if (!(param in params) || !params[param])
-                    throw new ReferenceError('Parameter "' + param + '" required for ' + route + ' but not defined!');
+                    console.warn('Parameter "' + param + '" required for ' + route + ' but not defined!');
                 return encodeURIComponent(params[param])
             });
         }
