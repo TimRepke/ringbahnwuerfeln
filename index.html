@@ -836,6 +836,7 @@
             API.addTeam(Keks.get('game'), name, secret).then(function (result) {
                 Keks.set('teamName', name);
                 Keks.set('teamSecret', secret);
+                that.refresh();
                 console.log(result);
                 that.hideModal();
             }).catch(function (error) {
