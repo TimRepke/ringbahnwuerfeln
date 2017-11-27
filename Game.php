@@ -19,11 +19,12 @@ class Game {
         $fname = preg_replace("/[^a-z0-9 ]/", '', strtolower($this->name));;
         $filename = '/'.$this->path . '/' . $fname . '.json';
         if (!file_exists($filename) && isset($_GET['start']) && $this->has_admin_rights()) {
-            if (file_put_contents($filename, '{
-                "teams": {},
-                "name": "'.$this->name.'"",
-                "start": "'.$_GET['start'].'"
-            }')) {
+            $res = file_put_contents($filename, '{
+                    "teams": {},
+                    "name": "' . $this->name . '"",
+                    "start": "' . $_GET['start'] . '"
+                }');
+            if ($res !== FALSE) {
                 $this->render_response(['msg' => 'CREATED_NEW_GAME', 'name' => $this->name, 'start' => $_GET['start']]);
             } else {
                 $this->render_error('FAILED_FILE_WRITE');
@@ -35,7 +36,9 @@ class Game {
     private function has_admin_rights() {
         if (isset($_GET['adminToken'])) {
             $adminToken = file_get_contents($this->path.'/adminToken');
-            return $_GET['adminToken'] == $adminToken;
+            if($_GET['adminToken'] == $adminToken)
+                return TRUE;
+            $this->render_error('NO_ADMIN_RIGHTS');
         }
         $this->render_error('NO_ADMIN_RIGHTS');
         return false;
@@ -76,6 +79,7 @@ class Game {
             $ret['params'][$k] = $v;
         }
         $this->render_response($ret);
+        exit(1);
     }
     
     private function check_team_auth() {

@@ -17,4 +17,4 @@ Zum Würfeln klickt man auf den Würfel in der Mitte der Ringbahn. Danach wird d
 
 ## Neue Tour
 Eine neue Tour kann man remote anlegen zusammen mit dem Admin-Token. Dazu folgende URL öffnen:
-`<URL>/Game.php?g=<name>&adminToken=<secretToken>&start=<startStationName>`, wobei `<secretToken>` in `gamefiles/adminToken`, `<game>` der eine Bezeichnung (idealerweise nur alhanumerisch ohne spaces oder sonstwas), und `<startStationName>` plaintext, case-sensitive Name der Startstation (z.B. Tempelhof).
+`<URL>/Game.php?t=&g=<name>&adminToken=<secretToken>&start=<startStationName>`, wobei `<secretToken>` in `gamefiles/adminToken`, `<game>` der eine Bezeichnung (idealerweise nur alhanumerisch ohne spaces oder sonstwas), und `<startStationName>` plaintext, case-sensitive Name der Startstation (z.B. Tempelhof).
