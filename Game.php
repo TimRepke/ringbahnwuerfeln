@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 
 class Game {
     
@@ -24,6 +24,7 @@ class Game {
                 "name": "'.$this->name.'"",
                 "start": "'.$_GET['start'].'"
             }');
+            $this->render_response(['msg' => 'CREATED_NEW_GAME', 'name'=> $this->name, 'start'=>$_GET['start']]);
         }
         return __DIR__.$filename;
     }
@@ -33,6 +34,7 @@ class Game {
             $adminToken = file_get_contents($this->path.'/adminToken');
             return $_GET['adminToken'] == $adminToken;
         }
+        $this->render_error('NO_ADMIN_RIGHTS');
         return false;
     }
     

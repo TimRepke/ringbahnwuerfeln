@@ -57,6 +57,60 @@
                     "rolled_time": 1511651707,
                     "rolled_steps": 5,
                     "beer_size": 0.5
+                },
+                {
+                    "stop": 26,
+                    "rolled_time": 1511652287,
+                    "rolled_steps": 6,
+                    "beer_size": 0.5
+                },
+                {
+                    "stop": 27,
+                    "rolled_time": 1511652950,
+                    "rolled_steps": 1,
+                    "beer_size": 0.33
+                }
+            ]
+        },
+        "Manu": {
+            "name": "Manu",
+            "secret": "manu",
+            "stops": [
+                {
+                    "stop": 0,
+                    "beer_size": 0,
+                    "rolled_time": 1511727807,
+                    "rolled_steps": 0
+                },
+                {
+                    "stop": 3,
+                    "rolled_time": 1511728022,
+                    "rolled_steps": 3,
+                    "beer_size": 0.33
+                }
+            ]
+        },
+        "Manuh": {
+            "name": "Manuh",
+            "secret": "manu",
+            "stops": [
+                {
+                    "stop": 0,
+                    "beer_size": 0,
+                    "rolled_time": 1511728088,
+                    "rolled_steps": 0
+                }
+            ]
+        },
+        "Mannu": {
+            "name": "Mannu",
+            "secret": "manu",
+            "stops": [
+                {
+                    "stop": 0,
+                    "beer_size": 0,
+                    "rolled_time": 1511729853,
+                    "rolled_steps": 0
                 }
             ]
         }
