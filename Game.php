@@ -19,12 +19,15 @@ class Game {
         $fname = preg_replace("/[^a-z0-9 ]/", '', strtolower($this->name));;
         $filename = '/'.$this->path . '/' . $fname . '.json';
         if (!file_exists($filename) && isset($_GET['start']) && $this->has_admin_rights()) {
-            file_put_contents($filename, '{
+            if (file_put_contents($filename, '{
                 "teams": {},
                 "name": "'.$this->name.'"",
                 "start": "'.$_GET['start'].'"
-            }');
-            $this->render_response(['msg' => 'CREATED_NEW_GAME', 'name'=> $this->name, 'start'=>$_GET['start']]);
+            }')) {
+                $this->render_response(['msg' => 'CREATED_NEW_GAME', 'name' => $this->name, 'start' => $_GET['start']]);
+            } else {
+                $this->render_error('FAILED_FILE_WRITE');
+            }
         }
         return __DIR__.$filename;
     }
@@ -46,11 +49,16 @@ class Game {
     private function save_game_file() {
         $json_string = json_encode($this->game, JSON_PRETTY_PRINT);
         if (strlen($json_string) < 2000000){
-            file_put_contents($this->game_file_path, $json_string);
+            if(file_put_contents($this->game_file_path, $json_string)){
+                return TRUE;
+            } else {
+                $this->render_error('FILE_WRITE_ERROR');
+                return FALSE;
+            }
         } else {
             $this->render_error('FILE_TOO_LARGE');
+            return FALSE;
         }
-        
     }
     
     public function render_response($obj) {
@@ -88,12 +96,11 @@ class Game {
                     'rolled_steps' => 0
                 ]]
             ];
-            $this->save_game_file();
-            $this->render_response([
-                'msg' => 'SUCCESS',
-                'name' => $_GET['name'],
-                'secret' => $_GET['secret']
-            ]);
+            if($this->save_game_file()) {
+                $this->render_response(['msg' => 'SUCCESS', 'name' => $_GET['name'], 'secret' => $_GET['secret']]);
+            } else {
+                $this->render_error('FAILED_FILE_SAVE');
+            }
         } else {
             $this->render_error('TEAM_EXISTS');
         }
@@ -122,18 +129,20 @@ class Game {
                     'beer_size' => $this->get_beer_size($steps)
                 ];
                 array_push($this->game['teams'][$_GET['name']]['stops'], $new_stop);
-                
-                $this->save_game_file();
-                
-                $this->render_response([
-                    'team' => $team['name'],
-                    'secret' => $team['secret'],
-                    'steps' => $steps,
-                    'beer_size' => $new_stop['beer_size'],
-                    'current_stop' => $last_stop['stop'],
-                    'next_stop' => $new_stop['stop'],
-                    'blocked_till' => $new_stop['rolled_time']+$this->block_time
-                ]);
+    
+                if($this->save_game_file()) {
+                    $this->render_response([
+                        'team' => $team['name'],
+                        'secret' => $team['secret'],
+                        'steps' => $steps,
+                        'beer_size' => $new_stop['beer_size'],
+                        'current_stop' => $last_stop['stop'],
+                        'next_stop' => $new_stop['stop'],
+                        'blocked_till' => $new_stop['rolled_time']+$this->block_time
+                    ]);
+                } else {
+                    $this->render_error('FAILED_FILE_SAVE');
+                }
             }
         } else {
             $this->render_error('FAILED_TEAM_AUTH');
