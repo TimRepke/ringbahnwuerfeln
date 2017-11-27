@@ -17,8 +17,9 @@ class Game {
     
     private function load_game_file_path() {
         $fname = preg_replace("/[^a-z0-9 ]/", '', strtolower($this->name));;
-        $filename = '/'.$this->path . '/' . $fname . '.json';
+        $filename = __DIR__.'/'.$this->path . '/' . $fname . '.json';
         if (!file_exists($filename) && isset($_GET['start']) && $this->has_admin_rights()) {
+            fopen($filename, 'w');
             $res = file_put_contents($filename, '{
                     "teams": {},
                     "name": "' . $this->name . '"",
@@ -30,7 +31,7 @@ class Game {
                 $this->render_error('FAILED_FILE_WRITE');
             }
         }
-        return __DIR__.$filename;
+        return $filename;
     }
     
     private function has_admin_rights() {
